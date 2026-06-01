@@ -217,10 +217,12 @@ function get_combat_log() {
 
 /// Clean up combat system
 function cleanup_combat_system() {
+	// Clear all combat arrays
+	global.combat.player_party = array_create(0);
+	global.combat.enemy_party = array_create(0);
+	global.combat.turn_order = array_create(0);
+	global.combat.log = array_create(0);
 	global.combat.active = false;
-	array_delete(global.combat.player_party, 0, array_length(global.combat.player_party));
-	array_delete(global.combat.enemy_party, 0, array_length(global.combat.enemy_party));
-	array_delete(global.combat.turn_order, 0, array_length(global.combat.turn_order));
-	array_delete(global.combat.log, 0, array_length(global.combat.log));
+	
 	show_debug_message("✓ Combat system cleaned up");
 }
