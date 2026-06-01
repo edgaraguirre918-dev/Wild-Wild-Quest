@@ -69,13 +69,13 @@ function generate_random_quest() {
 /// @returns {string} title
 function generate_quest_title(quest_type) {
 	var titles = {
-		"rescue": ["Rescue the Villager", "Save the Merchant", "Free the Captive", "Retrieve the Lost One"],
-		"hunt": ["Slay the Beast", "Hunt the Bandit", "Destroy the Nest", "Defeat the Warlord"],
-		"explore": ["Scout the Ruins", "Map the Caverns", "Explore the Forest", "Survey the Wasteland"],
-		"investigate": ["Solve the Mystery", "Find the Artifact", "Investigate the Disappearance", "Uncover the Truth"]
+		rescue: ["Rescue the Villager", "Save the Merchant", "Free the Captive", "Retrieve the Lost One"],
+		hunt: ["Slay the Beast", "Hunt the Bandit", "Destroy the Nest", "Defeat the Warlord"],
+		explore: ["Scout the Ruins", "Map the Caverns", "Explore the Forest", "Survey the Wasteland"],
+		investigate: ["Solve the Mystery", "Find the Artifact", "Investigate the Disappearance", "Uncover the Truth"]
 	};
 	
-	var type_titles = titles[? quest_type];
+	var type_titles = variable_struct_get(titles, quest_type);
 	if (type_titles != undefined) {
 		return type_titles[irandom(array_length(type_titles) - 1)];
 	}
