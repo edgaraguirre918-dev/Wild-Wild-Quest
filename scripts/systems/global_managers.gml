@@ -1,5 +1,5 @@
 /// @description Global Managers - Centralized game state and system initialization
-/// @function gml_pragma("global", "init_global_managers")
+/// @function init_global_managers()
 
 // ============================================================================
 // GLOBAL GAME STATE MANAGER
@@ -11,8 +11,9 @@ function init_global_managers() {
 	global.game_paused = false;
 	global.game_running = true;
 	global.current_room_type = "town"; // town, guild_hall, dungeon, combat
+	global.current_day = 1;
 	
-	// Initialize subsystems
+	// Initialize subsystems (these are defined in their respective files)
 	init_town_system();
 	init_guild_system();
 	init_character_system();
@@ -24,7 +25,7 @@ function init_global_managers() {
 }
 
 // ============================================================================
-// DEBUG & UTILITY
+// DEBUG & UTILITY FUNCTIONS
 // ============================================================================
 
 /// Toggle pause state
@@ -50,6 +51,14 @@ function advance_day() {
 	on_daily_tick();
 }
 
+/// Trigger daily tick events
+function on_daily_tick() {
+	// Update quests
+	update_quests();
+	
+	show_debug_message("→ Daily tick triggered (Day " + string(global.current_day) + ")");
+}
+
 /// Log game state (for debugging)
 function log_game_state() {
 	show_debug_message("=== GAME STATE ===");
@@ -57,36 +66,4 @@ function log_game_state() {
 	show_debug_message("Room: " + string(global.current_room_type));
 	show_debug_message("Paused: " + string(global.game_paused));
 	show_debug_message("==================");
-}
-
-// ============================================================================
-// PLACEHOLDER SYSTEM INITIALIZERS
-// ============================================================================
-
-function init_town_system() {
-	show_debug_message("→ Town system initialized");
-}
-
-function init_guild_system() {
-	show_debug_message("→ Guild system initialized");
-}
-
-function init_character_system() {
-	show_debug_message("→ Character system initialized");
-}
-
-function init_quest_system() {
-	show_debug_message("→ Quest system initialized");
-}
-
-function init_combat_system() {
-	show_debug_message("→ Combat system initialized");
-}
-
-function init_save_system() {
-	show_debug_message("→ Save system initialized");
-}
-
-function on_daily_tick() {
-	show_debug_message("→ Daily tick triggered");
 }
